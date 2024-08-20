@@ -29,8 +29,9 @@ class schoolController extends Controller
 
 
 function list(){
-    $schoolData = School::all();
-   return view('list-schools',['schools'=>$schoolData]);
+   // return "list";
+    $return = School::all();
+  // return view('list-schools',['schools'=>$schoolData]);
 }
 function  delete($id){
    echo  $isDelete= School::destroy($id);
