@@ -14,7 +14,7 @@ class schoolController extends Controller
     $schools->name= $request->name;
     $schools->email= $request->email;
     $schools->bash= $request->bash;
-    
+
     $result= $schools->save();
     if($request){
         return redirect('list');
@@ -24,7 +24,7 @@ class schoolController extends Controller
     }
 
 
-    
+
 }
 
 
@@ -42,11 +42,42 @@ function  delete($id){
 
     //
 }
-    
+
+function edit($id){
+    $Schools= School::find($id);
+    return view('edit-student',["data"=>$Schools]);
+   // return$id;
+}
+
+function editSchool(Request $request, $id){
+   // return "edit";
+    $schools= School::find($id);
+    $schools->name=$request->name;
+    $schools->email=$request->email;
+    $schools->bash= $request->bash;
+    if($schools->save()){
+        return redirect("list");
+
+    }else{
+        echo "Please something went";
     }
-    
-    
+
+
+
+  //  return $schools;
+
+}
+
+function search(Request $request){
+    $schoolData =  School::where('name', 'like', "%$request->search%")->get();
+    return view('list-schools',['schools'=>$schoolData]);
+    //  return $schoolData;
+    //echo "serch";
+  //  return $request->search;
+
+
+}
+    }
+
+
     //return "add function called";
-    
-   
-    
